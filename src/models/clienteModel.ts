@@ -1,6 +1,6 @@
 import { Entity, PrimaryColumn, Column } from "typeorm";
 
-@Entity("clientes")
+@Entity("tbl_cliente")
 export class Cliente {
     @PrimaryColumn({ type: "varchar", length: 14, unique: true, nullable: false })
     cpf!: string;

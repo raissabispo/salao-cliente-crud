@@ -1,28 +1,18 @@
 import express, { Application } from "express";
-import cors, { CorsOptions } from "cors";
-import Routes from "./src/routes/routes";
-import { AppDataSource } from "./src/db/data-source";
+import Server from "./src/index";
 
-export default class Server {
-    constructor(app: Application) {
-        this.config(app);
-        new Routes(app);
-    }
+const app: Application = express();
+const server: Server = new Server(app);
+const PORT: number = 8081;
 
-    private config(app: Application): void {
-        const corsOptions: CorsOptions = {
-            origin: "http://localhost:8081"
-        };
-
-        app.use(cors(corsOptions));
-        app.use(express.json());
-        app.use(express.urlencoded({ extended: true }));
-    }
-}
-
-AppDataSource.initialize()
-    .then(() => {
-        // here you can start to work with your database
-        console.log(`Database is running.`);
+app
+    .listen(PORT, "localhost", function () {
+        console.log(`Server is running on port ${PORT}.`);
     })
-    .catch((error) => console.log(error))
+    .on("error", (err: any) => {
+        if (err.code === "EADDRINUSE") {
+            console.log("Error: address already in use");
+        } else {
+            console.log(err);
+        }
+    });

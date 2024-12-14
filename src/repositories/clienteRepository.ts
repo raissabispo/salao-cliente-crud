@@ -86,13 +86,19 @@ class ClienteRepository {
     // Método para deletar todos os clientes
     async deleteAll(): Promise<number> {
         try {
-            const result = await this.clienteRepository.query("SELECT COUNT(cpf) FROM clientes;");
-            await this.clienteRepository.query("DELETE FROM clientes;");
-            return result[0]['COUNT(cpf)'];
+            // Contar quantos clientes existem antes de deletar
+            const count = await this.clienteRepository.count();  // Contagem de clientes na tabela
+            
+            // Deletar todos os clientes
+            await this.clienteRepository.clear();  // Limpa a tabela (deleta todos os registros)
+            
+            return count;  // Retorna o número de clientes que foram deletados
         } catch (error) {
             throw new Error("Falha ao deletar todos os clientes!");
         }
     }
+    
+    
 }
 
 export default new ClienteRepository();

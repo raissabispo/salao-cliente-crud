@@ -1,27 +1,28 @@
 import express, { Application } from "express";
-import cors from "cors";
-import Routes from "./routes/routes";
+import cors, { CorsOptions } from "cors";
+import Routes from "../src/routes/routes";
 import { AppDataSource } from "./db/data-source";
 
-const app: Application = express();
-const PORT = 8081;
+export default class Server {
+    constructor(app: Application) {
+        this.config(app);
+        new Routes(app);
+    }
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+    private config(app: Application): void {
+        const corsOptions: CorsOptions = {
+            origin: "http://localhost:8081"
+        };
 
-new Routes(app);
+        app.use(cors(corsOptions));
+        app.use(express.json());
+        app.use(express.urlencoded({ extended: true }));
+    }
+}
 
 AppDataSource.initialize()
     .then(() => {
-    
-        console.log("Database is running.");
+        // here you can start to work with your database
+        console.log(`Database is running.`);
     })
-    .catch((error) => {
-        console.log(error);
-    });
-
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
-});
+    .catch((error) => console.log(error))   
