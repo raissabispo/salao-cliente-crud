@@ -100,7 +100,6 @@ O repositório está organizado da seguinte maneira:
 │   ├── /controllers     # Lógica de negócios
 │   ├── /models          # Modelos de dados (banco de dados)
 │   ├── /routes          # Definições de rotas
-│   └── /views           # Views (se aplicável)
 │
 ├── .gitignore           # Arquivo para ignorar arquivos no Git (ex.: node_modules, .env)
 ├── package.json         # Gerenciador de dependências e scripts do projeto
