@@ -7,7 +7,7 @@ Este é um projeto desenvolvido para o projeto integrador do Senac e tem como ob
 
 - **Node.js**: Ambiente de execução JavaScript.
 - **Express**: Framework para construção de APIs.
-- **Banco de Dados**: Exemplo: MongoDB, MySQL.
+- **Banco de Dados**: MySQL.
 - **TypeScript**: Para tipagem estática no código JavaScript.
 - **Postman**: Ferramenta para testar APIs.
 
